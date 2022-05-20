@@ -16,9 +16,31 @@
  * 
  */
 
+/**
+ * @file Display.cpp
+ * @author Patrick Pedersen
+ * 
+ * @brief Defines functions for the Display class.
+ * 
+ * The following file defines functions for the Display class.
+ * See Display.h for more information.
+ *  
+ */
+
 #include <config.h>
 #include <Display.h>
 
+/**
+ * @brief Converts a uint8_t to a fixed size string.
+ * 
+ * The following function converts a uint8_t to a fixed size string.
+ * In other words, each number is represented with 3 digits, where
+ * zeroes are prepended if necessary (ex. 001, 015 etc.).
+ * 
+ * @param n The number to convert.
+ * @return The converted number as a fixed size string.
+ * 
+ */
 String uint8_to_fixed_str(uint8_t n)
 {
 	String ret = "";
@@ -30,6 +52,19 @@ String uint8_to_fixed_str(uint8_t n)
 	return ret;
 }
 
+/**
+ * @brief Converts RGB values to a string.
+ * 
+ * The following function converts RGB values to a string with
+ * the following format:
+ * 	"R:<red> G:<green> B:<blue>"
+ *
+ * @param r The red value.
+ * @param g The green value.
+ * @param b The blue value.
+ * @return The converted RGB values as a string.
+ * 
+ */
 String rgb_to_str(uint8_t r, uint8_t g, uint8_t b)
 {
 	String ret = "";
@@ -39,6 +74,7 @@ String rgb_to_str(uint8_t r, uint8_t g, uint8_t b)
 	return ret;
 }
 
+// See header file for documentation.
 Display::Display(String title_text)
 : title_text(title_text), display(new Adafruit_SSD1306(OLED_WIDTH, OLED_HEIGHT, &Wire, OLED_RESET))
 {
@@ -48,16 +84,19 @@ Display::Display(String title_text)
 	}
 }
 
+// See header file for documentation.
 void Display::start_screensaver()
 {
 	show_screensaver = true;
 }
 
+// See header file for documentation.
 void Display::stop_screensaver()
 {
 	show_screensaver = false;
 }
 
+// See header file for documentation.
 void Display::screensaver()
 {
 	static bool wait = false;
@@ -72,13 +111,18 @@ void Display::screensaver()
 	display->setTextSize(1);
   	display->setTextColor(WHITE);
 
+	// Draw credits at top of screen.
 	display->setCursor(0,0);
 	display->println(SCREEN_SAVER_CREDITS_MSG);
 
+	// Draw Waddle Dee with open eyes
 	if (random(0, 100) <= 60) {
 		display->drawBitmap(0, 20, WaddleDeeOpen, 128, 64, WHITE);
 		wait_until = millis() + SCREEN_SAVER_MIN_EYES_OPEN_TIME;
-	} else {
+	}
+	
+	// Draw Waddle Dee with closed eyes
+	else {
 		display->drawBitmap(0, 20, WaddleDeeClosed, 128, 64, WHITE);
 		wait_until = millis() + SCREEN_SAVER_MIN_BLINK_TIME;
 	}
@@ -87,6 +131,7 @@ void Display::screensaver()
 	display->display();
 }
 
+// See header file for documentation.
 void Display::update()
 {
 	if(show_screensaver) {
@@ -112,11 +157,13 @@ void Display::update()
 	display->display();
 }
 
+// See header file for documentation.
 void Display::set_n_leds(unsigned long n)
 {
 	n_leds = n;
 }
 
+// See header file for documentation.
 void Display::set_rgb(uint8_t r, uint8_t g, uint8_t b)
 {
 	this->r = r;

@@ -16,6 +16,17 @@
  * 
  */
 
+/**
+ * @file main.cpp
+ * @author Patrick Pedersen
+ * 
+ * @brief Main firmware file for the strip tester
+ * 
+ * The following file handles the main routines for the
+ * strip tester firmware. This includes initializing the
+ * hardware and handling the hardware at a high level.
+ */
+
 #include <Arduino.h>
 
 #include <config.h>
@@ -29,6 +40,13 @@ ColorPots *color_pots;
 Display *display;
 Strip *strip;
 
+/**
+ * @brief Initializes the hardware.
+ * 
+ * The following function initializes the hardware
+ * through the use of hardware abstraction libraries/classes.
+ * 
+ */
 void setup()
 {
 	Serial.begin(9600);
@@ -44,20 +62,42 @@ void setup()
 	display->update();
 }
 
+/**
+ * @brief Main loop for the firmware.
+ * 
+ * The following function is the main loop for the
+ * firmware. It is responsible for continuously
+ * handling the hardware at a high level (through
+ * the use of hardware abstraction libraries/classes),
+ * as well as handling when the screensaver should be
+ * activated or deactivated.
+ * 
+ * The firmware has been written in a way where the
+ * rotary encoder has the highset priority. Only once
+ * the rotary encoder has "cooled down" (see SizeEncoder.ready()),
+ * any remaining hardware will be handled.
+ * 
+ */ 
 void loop()
 {
 	bool changed = false;
 
+	// Check if rotary encoder is "cooled down",
+	// then check if hardware inputs have changed.
 	if (size_enc->ready()) {
-		changed = (strip->get_n_leds() != size_enc->ready_pos());
-		changed = changed || color_pots->update();
+		changed = (strip->get_n_leds() != size_enc->ready_pos()); // Check if encoder has changed
+		changed = changed || color_pots->update(); 		  // Check if color pots have changed
 	}
 
+	// Enable screensaver if color pots are set to 0, and the pot
+	// and rotary encoder remain unchanged for SHOW_SCREENSAVER_TIMEOUT_MS 
+	// ms (See config.h).
 	if (color_pots->t_since_last_change() >= SHOW_SCREENSAVER_AFTER_MSECS &&
 	    size_enc->t_since_last_change() >= SHOW_SCREENSAVER_AFTER_MSECS &&
 	    color_pots->zeroed()) {
 		display->start_screensaver();
 
+		// Display until hardware has changed 
 		while(!color_pots->update() && !size_enc->update())
 			display->update();
 		
@@ -65,14 +105,18 @@ void loop()
 		changed = true;
 	}
 
+	// Handle hardware changes
 	if (changed) {
 		uint8_t r,g,b;
-		color_pots->get_rgb(r, g, b);
-		display->set_rgb(r, g, b);
-		display->set_n_leds(size_enc->ready_pos());
-		strip->set_n_leds(size_enc->ready_pos());
-		display->update();
+		color_pots->get_rgb(r, g, b); 	            // Get color from color pots
+		display->set_rgb(r, g, b); 		    // Update color values on display
+		display->set_n_leds(size_enc->ready_pos()); // Update LED count on display
+		strip->set_rgb(r, g, b);		    // Update color on strip
+		strip->set_n_leds(size_enc->ready_pos());   // Update LED count on strip
+		strip->update_strip();			    // Update strip
+		display->update();			    // Update display
 	}
 	
+	// Handle Rotary Encoder
 	size_enc->update();
 }

@@ -16,30 +16,50 @@
  * 
  */
 
+/**
+ * @file SizeEncoder.cpp
+ * @author Patrick Pedersen
+ * 
+ * @brief Contains function definitions for the SizeEncoder class.
+ * 
+ * The following file contains the function definitions for the SizeEncoder class.
+ */
+
+
 #include <config.h>
 #include <SizeEncoder.h>
 
-inline long SizeEncoder::read_enc() {
+// See header file for documentation.
+inline long SizeEncoder::read_enc()
+{
 	return enc->read() >> SHFT_CORRECT_ENCODER_STEP_SIZE;
 }
 
-void SizeEncoder::prep_rdy() {
+// See header file for documentation.
+void SizeEncoder::prep_rdy()
+{
 	rdy = false;
 	rdy_tstamp = millis() + ready_time;
 }
 
+// See header file for documentation.
 SizeEncoder::SizeEncoder(uint8_t pin_a, uint8_t pin_b, unsigned long ready_time_ms)
-: enc(new Encoder(pin_a, pin_b)), ready_time(ready_time_ms) {
+: enc(new Encoder(pin_a, pin_b)), ready_time(ready_time_ms)
+{
 	saved_pos = read_enc();
 	rdy_pos = saved_pos;
 	prep_rdy();
 };
 
-SizeEncoder::~SizeEncoder() {
+// See header file for documentation.
+SizeEncoder::~SizeEncoder()
+{
 	delete enc;
 }
 
-bool SizeEncoder::update() {
+// See header file for documentation.
+bool SizeEncoder::update()
+{
 	bool ret = false;
 	long pos = read_enc();
 	
@@ -64,18 +84,20 @@ bool SizeEncoder::update() {
 	return ret;
 }
 
-bool SizeEncoder::ready() {
+// See header file for documentation.
+bool SizeEncoder::ready()
+{
 	return rdy;
 }
 
-unsigned long SizeEncoder::ready_pos() {
+// See header file for documentation.
+unsigned long SizeEncoder::ready_pos()
+{
 	return rdy_pos;
 }
 
-unsigned long SizeEncoder::instant_pos() {
-	return saved_pos;
-}
-
-unsigned long SizeEncoder::t_since_last_change() {
+// See header file for documentation.
+unsigned long SizeEncoder::t_since_last_change()
+{
 	return millis() - last_change_tstamp;
 }

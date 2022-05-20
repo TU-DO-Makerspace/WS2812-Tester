@@ -13,23 +13,55 @@
 
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ *
+ */
+
+/**
+ * @file ColorPots.cpp
+ * @author Patrick Pedersen
+ * 
+ * @brief Contains function definitions for the ColorPots class.
+ * 
+ * The following file contains the function definitions for the ColorPots class.
+ * See the ColorPots.h file for more information.
  * 
  */
 
 #include <config.h>
 #include <ColorPots.h>
 
-uint8_t avg_read_pot(uint8_t pin, uint8_t n_avg) {
+/**
+ * @brief Reads the average value (of n samples) for a potentiometer.
+ * 
+ * The following function is used to read the average value of a potentiometer
+ * across n_avg samples.
+ * 
+ * @param pin The pin of the potentiometer to read from.
+ * @param n_avg The number of samples to average over.
+ * @return uint8_t The average value of the potentiometer (0-255).
+ * 
+ */
+uint8_t avg_read_pot(uint8_t pin, uint8_t n_avg)
+{
 	float sum = 0;
-	for (unsigned int i = 0; i < n_avg; i++) {
-		sum += analogRead(pin) >> SHFT_ADC_TO_UINT8;
-	}
 
-	return round(sum / n_avg);
+	for (unsigned int i = 0; i < n_avg; i++)
+		sum += analogRead(pin) >> SHFT_ADC_TO_UINT8;
+	
+	uint8_t ret = (uint8_t)round(sum / n_avg);
+	if (ret >= POT_UPPER_BOUND)
+		return 255;
+	
+	if (ret <= POT_LOWER_BOUND)
+		return 0;
+
+	return ret;
 }
 
+// See header file for documentation.
 ColorPots::ColorPots(uint8_t pin_r, uint8_t pin_g, uint8_t pin_b)
-: pin_r(pin_r), pin_g(pin_g), pin_b(pin_b) {
+: pin_r(pin_r), pin_g(pin_g), pin_b(pin_b)
+{
 	pinMode(pin_r, INPUT);
 	pinMode(pin_g, INPUT);
 	pinMode(pin_b, INPUT);
@@ -37,7 +69,9 @@ ColorPots::ColorPots(uint8_t pin_r, uint8_t pin_g, uint8_t pin_b)
 	last_change_tstamp = millis();
 }
 
-bool ColorPots::update() {
+// See header file for documentation.
+bool ColorPots::update()
+{
 	bool ret = false;
 
 	uint8_t _r, _g, _b;
@@ -45,6 +79,7 @@ bool ColorPots::update() {
 	_g = avg_read_pot(pin_g, AVG_ADC_SAMPLES);
 	_b = avg_read_pot(pin_b, AVG_ADC_SAMPLES);
 
+	// Check if any of the values have changed.
 	if (_r != r || _g != g || _b != b) {
 		last_change_tstamp = millis();
 		ret = true;
@@ -57,16 +92,22 @@ bool ColorPots::update() {
 	return ret;
 }
 
-bool ColorPots::zeroed() {
+// See header file for documentation.
+bool ColorPots::zeroed()
+{
 	return !(r | g | b);
 }
 
-void ColorPots::get_rgb(uint8_t &r, uint8_t &g, uint8_t &b) {
+// See header file for documentation.
+void ColorPots::get_rgb(uint8_t &r, uint8_t &g, uint8_t &b)
+{
 	r = this->r;
 	g = this->g;
 	b = this->b;
 }
 
-unsigned long ColorPots::t_since_last_change() {
+// See header file for documentation.
+unsigned long ColorPots::t_since_last_change()
+{
 	return millis() - last_change_tstamp;
 }

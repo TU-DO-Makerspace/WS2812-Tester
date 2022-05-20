@@ -1,0 +1,34 @@
+digraph "src/main.cpp"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="src/main.cpp",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Main firmware file for the strip tester."];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="Arduino.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="config.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$config_8h.html",tooltip="Configuration file for the firmware."];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="Strip.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$Strip_8h.html",tooltip="Contains the Strip class."];
+  Node4 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="ws2812_cpp.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node1 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="SizeEncoder.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$SizeEncoder_8h.html",tooltip="Contains the size encoder class."];
+  Node6 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="Encoder.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node1 -> Node8 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="ColorPots.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$ColorPots_8h.html",tooltip="Provides the ColorPots class."];
+  Node8 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node9 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="Display.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$Display_8h.html",tooltip="Provides the Display class."];
+  Node9 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 -> Node10 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node10 [label="Adafruit_GFX.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node9 -> Node11 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node11 [label="Adafruit_SSD1306.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node9 -> Node12 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node12 [label="Wire.h",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node9 -> Node13 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node13 [label="screensaver.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$screensaver_8h.html",tooltip="Contains the BMP data for the Waddle Dee screensaver."];
+  Node13 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}
