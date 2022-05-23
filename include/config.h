@@ -55,13 +55,13 @@
 #define SCREEN_SAVER_CREDITS_MSG F("Credits:u/LordShrekM8") /// Credits message to display on screensaver
 #define SCREEN_SAVER_MIN_EYES_OPEN_TIME 3000		    /// Minimum time for Waddle Dee to keep eyes open
 #define SCREEN_SAVER_MIN_BLINK_TIME 150			    /// Minimum time for Waddle Dee to blink
-#define SHOW_SCREENSAVER_AFTER_MSECS 20000 		    /// ms after which the screensaver will 
+#define SHOW_SCREENSAVER_AFTER_MSECS 60000 		    /// ms after which the screensaver will 
                                                             /// be shown if RGB = 0 and the device is not
                                                             /// being used
 
 // Firmware Info (Displayed on top of the display)
 #define FW_NAME F("WS2812 Tester") 	 /// Name of the firmware
-#define FW_REVISION F("0.3")      	 /// Revision of the firmware
+#define FW_REVISION F("0.3.1")      	 /// Revision of the firmware
 #define FW_AUTHORS F("TU-DO Makerspace") /// Authors of the firmware
 
 // OLED Display
