@@ -41,7 +41,7 @@
  * @return uint8_t The average value of the potentiometer (0-255).
  * 
  */
-uint8_t avg_read_pot(uint8_t pin, uint8_t n_avg)
+uint8_t avg_read_pot(uint8_t pin, uint16_t n_avg)
 {
 	float sum = 0;
 

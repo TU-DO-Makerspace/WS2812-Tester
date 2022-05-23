@@ -32,7 +32,7 @@
 #define POT_R A1            /// Pin for red pot
 #define POT_G A2            /// Pin for green pot
 #define POT_B A3 	    /// Pin for blue pot
-#define AVG_ADC_SAMPLES 255 /// Number of ADC samples to average
+#define AVG_ADC_SAMPLES 500 /// Number of ADC samples to average
                             /// to compensate for noisy pots
 #define POT_UPPER_BOUND 253 /// Upper bound for pot values
 #define POT_LOWER_BOUND 0   /// Lower bound for pot values
@@ -61,7 +61,7 @@
 
 // Firmware Info (Displayed on top of the display)
 #define FW_NAME F("WS2812 Tester") 	 /// Name of the firmware
-#define FW_REVISION F("0.3.1")      	 /// Revision of the firmware
+#define FW_REVISION F("0.3.2")      	 /// Revision of the firmware
 #define FW_AUTHORS F("TU-DO Makerspace") /// Authors of the firmware
 
 // OLED Display
