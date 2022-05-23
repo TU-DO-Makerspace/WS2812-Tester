@@ -61,7 +61,7 @@
 
 // Firmware Info (Displayed on top of the display)
 #define FW_NAME F("WS2812 Tester") 	 /// Name of the firmware
-#define FW_REVISION F("0.2")      	 /// Revision of the firmware
+#define FW_REVISION F("0.3")      	 /// Revision of the firmware
 #define FW_AUTHORS F("TU-DO Makerspace") /// Authors of the firmware
 
 // OLED Display
@@ -71,4 +71,3 @@
 #define OLED_HEIGHT 64          /// Height of the display in pixels
 #define OLED_RESET -1           /// Reset pin (or -1 if unused)
 #define OLED_I2C_ADDRESS 0x3C   /// I2C address of the display
-

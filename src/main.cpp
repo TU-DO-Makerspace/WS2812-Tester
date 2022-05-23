@@ -89,12 +89,10 @@ void loop()
 		changed = changed || color_pots->update(); 		  // Check if color pots have changed
 	}
 
-	// Enable screensaver if color pots are set to 0, and the pot
-	// and rotary encoder remain unchanged for SHOW_SCREENSAVER_TIMEOUT_MS 
-	// ms (See config.h).
+	// Enable screensaver if pots and rotary encoder remain 
+	// unchanged for SHOW_SCREENSAVER_TIMEOUT_MS ms (See config.h).
 	if (color_pots->t_since_last_change() >= SHOW_SCREENSAVER_AFTER_MSECS &&
-	    size_enc->t_since_last_change() >= SHOW_SCREENSAVER_AFTER_MSECS &&
-	    color_pots->zeroed()) {
+	    size_enc->t_since_last_change() >= SHOW_SCREENSAVER_AFTER_MSECS) {
 		display->start_screensaver();
 
 		// Display until hardware has changed 
