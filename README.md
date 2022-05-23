@@ -1,15 +1,33 @@
-# WS2812 Strip Tester
+# WS2812 Strip Tester  <!-- omit in toc -->
 
 ![](img/Showcase.png)
 
 The WS2812 strip tester is a simple device that allows you to test the
 size and colors of a WS2812 strip.
 
+## Table of Contents <!-- omit in toc -->
+
+- [Motivation](#motivation)
+- [Features](#features)
+- [Hardware](#hardware)
+- [Firmware](#firmware)
+  - [Dependencies](#dependencies)
+  - [Overview](#overview)
+- [License](#license)
+- [License](#license-1)
+
 ## Motivation
 
 The WS2812 strip tester has been developed out of the need to obtain size and color information for a WS2812 strip when installing and configuring WS2812 controllers.
 Instead of having to manually count or guess the number of LEDs, the strip tester allows me to quickly measure the number of LEDs on the strip by simply turning the rotary encoder until the end of the strip has been reached. The number of activated LEDs is displayed on the OLED display, which in return provides the strip size that can then be applied to the configuration of a strip controller.
 In addition to determining the strip size, the tester can also test out how colors are displayed on the strip using the 3 potentiometers, each setting the value of color channel (RGB). Often WS2812 strips do not accurately display the color values that are set on the strip, so the tester can be used to determine the color values that are most accurate.
+
+## Features
+
+- Rotary encoder to determine the number of LEDs on the strip
+- RGB Pots to test out color values
+- OLED display to display the number of LEDs and color values
+- A cute screensaver when the device is idling :)
 
 ## Hardware
 
